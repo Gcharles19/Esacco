@@ -16,6 +16,9 @@ namespace Esacco.Data
         public string Telphone2 { get; set; }
         public string Email { get; set; }
         public string IdNo { get; set; }
+        public string NextofKinName { get; set; }
+        public string NextofKinAdress { get; set; }
+        public string NextofKinContact { get; set; }
         public DateTime DateOfBirth { get; set; }
         public DateTime DateJoined { get; set; }
 
