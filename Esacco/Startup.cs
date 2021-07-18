@@ -1,4 +1,7 @@
+using Esacco.Contracts;
 using Esacco.Data;
+using Esacco.Mappings;
+using Esacco.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,6 +33,16 @@ namespace Esacco
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
+            //Add References For Repository And Contratcs to Startup File
+            services.AddScoped<ICustomerRepo, CustomerRepo>();
+            services.AddScoped<IEmployeeRepo, EmployeeRepo>();
+            services.AddScoped<IStatusRepo, StatusRepo>();
+            services.AddScoped<ISysConfigRepo, SysConfigRepo>();
+
+            //Add Automapper service
+            services.AddAutoMapper(typeof(Maps));
+
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();

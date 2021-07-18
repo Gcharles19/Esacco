@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Esacco.Data
+namespace Esacco.Models
 {
-    public class Customer
+    public class CustomerVM
     {
-        [Key]
         public int CustomerID { get; set; }
         public string CustomerNo { get; set; }
         public string FirstName { get; set; }
@@ -23,11 +20,6 @@ namespace Esacco.Data
         public string NextofKinAdress { get; set; }
         public string NextofKinContact { get; set; }
         public DateTime DateOfBirth { get; set; }
-        [ForeignKey("StatusID")]
-        public Status Status { get; set; }
-        public int StatusID { get; set; }
         public DateTime DateJoined { get; set; }
-        
-
     }
 }

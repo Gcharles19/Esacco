@@ -1,15 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Esacco.Data
+namespace Esacco.Models
 {
-    public class Status
+    public class StatusVM
     {
-        [Key]
-        public int StatusID { get; set; }
+        public int Id { get; set; }
         public string StatusName { get; set; }
         public string StatusCode { get; set; }
     }

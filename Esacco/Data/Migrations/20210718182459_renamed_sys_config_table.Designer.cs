@@ -4,14 +4,16 @@ using Esacco.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Esacco.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210718182459_renamed_sys_config_table")]
+    partial class renamed_sys_config_table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,9 +61,6 @@ namespace Esacco.Data.Migrations
                     b.Property<string>("NextofKinName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatusID")
-                        .HasColumnType("int");
-
                     b.Property<string>("Telphone1")
                         .HasColumnType("nvarchar(max)");
 
@@ -70,14 +69,12 @@ namespace Esacco.Data.Migrations
 
                     b.HasKey("CustomerID");
 
-                    b.HasIndex("StatusID");
-
                     b.ToTable("Customers");
                 });
 
             modelBuilder.Entity("Esacco.Data.Status", b =>
                 {
-                    b.Property<int>("StatusID")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -88,7 +85,7 @@ namespace Esacco.Data.Migrations
                     b.Property<string>("StatusName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("StatusID");
+                    b.HasKey("Id");
 
                     b.ToTable("Statuses");
                 });
@@ -339,21 +336,7 @@ namespace Esacco.Data.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StatusID")
-                        .HasColumnType("int");
-
-                    b.HasIndex("StatusID");
-
                     b.HasDiscriminator().HasValue("Employee");
-                });
-
-            modelBuilder.Entity("Esacco.Data.Customer", b =>
-                {
-                    b.HasOne("Esacco.Data.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -403,15 +386,6 @@ namespace Esacco.Data.Migrations
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Esacco.Data.Employee", b =>
-                {
-                    b.HasOne("Esacco.Data.Status", "Status")
-                        .WithMany()
-                        .HasForeignKey("StatusID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
